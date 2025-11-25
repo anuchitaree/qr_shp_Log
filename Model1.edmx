@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="rawscaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'rawsca.dbo.qr_shipping_log' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="qr_shipping_log">
+          <Property Name="SEQ" Type="int" />
+          <Property Name="W_H" Type="nvarchar" MaxLength="50" />
+          <Property Name="DEV_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="SYSFLG1" Type="nvarchar" MaxLength="1" />
+          <Property Name="SYSFLG2" Type="nvarchar" MaxLength="1" />
+          <Property Name="SYSFLG3" Type="nvarchar" MaxLength="1" />
+          <Property Name="SYSFLG4" Type="nvarchar" MaxLength="1" />
+          <Property Name="LOGIN_ID" Type="int" />
+          <Property Name="TR_DATE_YMD" Type="int" />
+          <Property Name="TR_TYPE" Type="nvarchar" MaxLength="50" />
+          <Property Name="OPE_SEQ" Type="nvarchar" MaxLength="50" />
+          <Property Name="RESULT" Type="nvarchar" MaxLength="50" />
+          <Property Name="RSN_CODE" Type="nvarchar" MaxLength="50" />
+          <Property Name="TRUCK_NO" Type="int" />
+          <Property Name="CUST_NO" Type="int" />
+          <Property Name="SHIP_NO" Type="nvarchar" MaxLength="50" />
+          <Property Name="CHECK_TYPE" Type="nvarchar" MaxLength="50" />
+          <Property Name="SHIP_P_N" Type="nvarchar" MaxLength="50" />
+          <Property Name="SHIP_QTY" Type="int" />
+          <Property Name="TAG_TYPE" Type="nvarchar" MaxLength="50" />
+          <Property Name="P_N" Type="nvarchar" MaxLength="50" />
+          <Property Name="CUST_P_N" Type="nvarchar" MaxLength="50" />
+          <Property Name="QTY" Type="nvarchar" MaxLength="50" />
+          <Property Name="TAG_SEQ" Type="nvarchar" MaxLength="50" />
+          <Property Name="SCAN_DATE_YMD" Type="int" />
+          <Property Name="SCAN_TIME" Type="int" />
+        </EntityType>-->
+        <EntityType Name="qr_shipping_log_mod">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="SEQ" Type="int" Nullable="false" />
+          <Property Name="LOGIN_ID" Type="int" Nullable="false" />
+          <Property Name="TR_DATE_YMD" Type="date" Nullable="false" />
+          <Property Name="TRUCK_NO" Type="int" Nullable="false" />
+          <Property Name="CUST_NO" Type="int" Nullable="false" />
+          <Property Name="TAG_TYPE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="P_N" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CUST_P_N" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="QTY" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TAG_SEQ" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SCAN_DATE_YMD" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="uuid" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="qr_shipping_log_org">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="SEQ" Type="int" Nullable="false" />
+          <Property Name="LOGIN_ID" Type="int" Nullable="false" />
+          <Property Name="TR_DATE_YMD" Type="int" Nullable="false" />
+          <Property Name="TRUCK_NO" Type="int" Nullable="false" />
+          <Property Name="CUST_NO" Type="int" Nullable="false" />
+          <Property Name="TAG_TYPE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="P_N" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CUST_P_N" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="QTY" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TAG_SEQ" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SCAN_DATE_YMD" Type="int" Nullable="false" />
+          <Property Name="SCAN_TIME" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="rawscaModelStoreContainer">
+          <EntitySet Name="qr_shipping_log_mod" EntityType="Self.qr_shipping_log_mod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="qr_shipping_log_org" EntityType="Self.qr_shipping_log_org" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="rawscaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="rawscaEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="qr_shipping_log_mod" EntityType="rawscaModel.qr_shipping_log_mod" />
+          <EntitySet Name="qr_shipping_log_org" EntityType="rawscaModel.qr_shipping_log_org" />
+        </EntityContainer>
+        <EntityType Name="qr_shipping_log_mod">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="SEQ" Type="Int32" Nullable="false" />
+          <Property Name="LOGIN_ID" Type="Int32" Nullable="false" />
+          <Property Name="TR_DATE_YMD" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TRUCK_NO" Type="Int32" Nullable="false" />
+          <Property Name="CUST_NO" Type="Int32" Nullable="false" />
+          <Property Name="TAG_TYPE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="P_N" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CUST_P_N" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QTY" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TAG_SEQ" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SCAN_DATE_YMD" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="uuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="qr_shipping_log_org">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="SEQ" Type="Int32" Nullable="false" />
+          <Property Name="LOGIN_ID" Type="Int32" Nullable="false" />
+          <Property Name="TR_DATE_YMD" Type="Int32" Nullable="false" />
+          <Property Name="TRUCK_NO" Type="Int32" Nullable="false" />
+          <Property Name="CUST_NO" Type="Int32" Nullable="false" />
+          <Property Name="TAG_TYPE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="P_N" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CUST_P_N" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QTY" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TAG_SEQ" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SCAN_DATE_YMD" Type="Int32" Nullable="false" />
+          <Property Name="SCAN_TIME" Type="Int32" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="rawscaModelStoreContainer" CdmEntityContainer="rawscaEntities" >
+          <EntitySetMapping Name="qr_shipping_log_mod">
+            <EntityTypeMapping TypeName="rawscaModel.qr_shipping_log_mod">
+              <MappingFragment StoreEntitySet="qr_shipping_log_mod">
+                <ScalarProperty Name="uuid" ColumnName="uuid" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SCAN_DATE_YMD" ColumnName="SCAN_DATE_YMD" />
+                <ScalarProperty Name="TAG_SEQ" ColumnName="TAG_SEQ" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="CUST_P_N" ColumnName="CUST_P_N" />
+                <ScalarProperty Name="P_N" ColumnName="P_N" />
+                <ScalarProperty Name="TAG_TYPE" ColumnName="TAG_TYPE" />
+                <ScalarProperty Name="CUST_NO" ColumnName="CUST_NO" />
+                <ScalarProperty Name="TRUCK_NO" ColumnName="TRUCK_NO" />
+                <ScalarProperty Name="TR_DATE_YMD" ColumnName="TR_DATE_YMD" />
+                <ScalarProperty Name="LOGIN_ID" ColumnName="LOGIN_ID" />
+                <ScalarProperty Name="SEQ" ColumnName="SEQ" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="qr_shipping_log_org">
+            <EntityTypeMapping TypeName="rawscaModel.qr_shipping_log_org">
+              <MappingFragment StoreEntitySet="qr_shipping_log_org">
+                <ScalarProperty Name="SCAN_TIME" ColumnName="SCAN_TIME" />
+                <ScalarProperty Name="SCAN_DATE_YMD" ColumnName="SCAN_DATE_YMD" />
+                <ScalarProperty Name="TAG_SEQ" ColumnName="TAG_SEQ" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="CUST_P_N" ColumnName="CUST_P_N" />
+                <ScalarProperty Name="P_N" ColumnName="P_N" />
+                <ScalarProperty Name="TAG_TYPE" ColumnName="TAG_TYPE" />
+                <ScalarProperty Name="CUST_NO" ColumnName="CUST_NO" />
+                <ScalarProperty Name="TRUCK_NO" ColumnName="TRUCK_NO" />
+                <ScalarProperty Name="TR_DATE_YMD" ColumnName="TR_DATE_YMD" />
+                <ScalarProperty Name="LOGIN_ID" ColumnName="LOGIN_ID" />
+                <ScalarProperty Name="SEQ" ColumnName="SEQ" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
