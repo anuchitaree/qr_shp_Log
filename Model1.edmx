@@ -5,22 +5,20 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="rawscaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'rawsca.dbo.qr_shipping_log' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="qr_shipping_log">
-          <Property Name="SEQ" Type="int" />
-          <Property Name="W_H" Type="nvarchar" MaxLength="50" />
-          <Property Name="DEV_ID" Type="nvarchar" MaxLength="50" />
-          <Property Name="SYSFLG1" Type="nvarchar" MaxLength="1" />
-          <Property Name="SYSFLG2" Type="nvarchar" MaxLength="1" />
-          <Property Name="SYSFLG3" Type="nvarchar" MaxLength="1" />
-          <Property Name="SYSFLG4" Type="nvarchar" MaxLength="1" />
-          <Property Name="LOGIN_ID" Type="int" />
-          <Property Name="TR_DATE_YMD" Type="int" />
-          <Property Name="TR_TYPE" Type="nvarchar" MaxLength="50" />
-          <Property Name="OPE_SEQ" Type="nvarchar" MaxLength="50" />
-          <Property Name="RESULT" Type="nvarchar" MaxLength="50" />
-          <Property Name="RSN_CODE" Type="nvarchar" MaxLength="50" />
+        <EntityType Name="qr_shipping_log_mod">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="SEQ" Type="int" Nullable="false" />
+          <Property Name="W_H" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DEV_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LOGIN_ID" Type="int" Nullable="false" />
+          <Property Name="TR_DATE_YMD" Type="date" Nullable="false" />
+          <Property Name="TR_TYPE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OPE_SEQ" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RESULT" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RSN_CODE" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TRUCK_NO" Type="int" />
           <Property Name="CUST_NO" Type="int" />
           <Property Name="SHIP_NO" Type="nvarchar" MaxLength="50" />
@@ -32,27 +30,10 @@ warning 6013: The table/view 'rawsca.dbo.qr_shipping_log' does not have a primar
           <Property Name="CUST_P_N" Type="nvarchar" MaxLength="50" />
           <Property Name="QTY" Type="nvarchar" MaxLength="50" />
           <Property Name="TAG_SEQ" Type="nvarchar" MaxLength="50" />
-          <Property Name="SCAN_DATE_YMD" Type="int" />
-          <Property Name="SCAN_TIME" Type="int" />
-        </EntityType>-->
-        <EntityType Name="qr_shipping_log_mod">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="SEQ" Type="int" Nullable="false" />
-          <Property Name="LOGIN_ID" Type="int" Nullable="false" />
-          <Property Name="TR_DATE_YMD" Type="date" Nullable="false" />
-          <Property Name="TRUCK_NO" Type="int" Nullable="false" />
-          <Property Name="CUST_NO" Type="int" Nullable="false" />
-          <Property Name="TAG_TYPE" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="P_N" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CUST_P_N" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="QTY" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="TAG_SEQ" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="SCAN_DATE_YMD" Type="datetime" Nullable="false" />
-          <Property Name="Status" Type="bit" Nullable="false" />
-          <Property Name="uuid" Type="nvarchar" MaxLength="50" />
+          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="point" Type="int" Nullable="false" />
+          <Property Name="uuid" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="qr_shipping_log_org">
           <Key>
@@ -60,15 +41,25 @@ warning 6013: The table/view 'rawsca.dbo.qr_shipping_log' does not have a primar
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="SEQ" Type="int" Nullable="false" />
+          <Property Name="W_H" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DEV_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LOGIN_ID" Type="int" Nullable="false" />
           <Property Name="TR_DATE_YMD" Type="int" Nullable="false" />
-          <Property Name="TRUCK_NO" Type="int" Nullable="false" />
-          <Property Name="CUST_NO" Type="int" Nullable="false" />
-          <Property Name="TAG_TYPE" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="P_N" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CUST_P_N" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="QTY" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="TAG_SEQ" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TR_TYPE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OPE_SEQ" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RESULT" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RSN_CODE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TRUCK_NO" Type="int" />
+          <Property Name="CUST_NO" Type="int" />
+          <Property Name="SHIP_NO" Type="nvarchar" MaxLength="50" />
+          <Property Name="CHECK_TYPE" Type="nvarchar" MaxLength="50" />
+          <Property Name="SHIP_P_N" Type="nvarchar" MaxLength="50" />
+          <Property Name="SHIP_QTY" Type="int" />
+          <Property Name="TAG_TYPE" Type="nvarchar" MaxLength="50" />
+          <Property Name="P_N" Type="nvarchar" MaxLength="50" />
+          <Property Name="CUST_P_N" Type="nvarchar" MaxLength="50" />
+          <Property Name="QTY" Type="nvarchar" MaxLength="50" />
+          <Property Name="TAG_SEQ" Type="nvarchar" MaxLength="50" />
           <Property Name="SCAN_DATE_YMD" Type="int" Nullable="false" />
           <Property Name="SCAN_TIME" Type="int" Nullable="false" />
         </EntityType>
@@ -90,18 +81,29 @@ warning 6013: The table/view 'rawsca.dbo.qr_shipping_log' does not have a primar
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="SEQ" Type="Int32" Nullable="false" />
+          <Property Name="W_H" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DEV_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LOGIN_ID" Type="Int32" Nullable="false" />
           <Property Name="TR_DATE_YMD" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="TRUCK_NO" Type="Int32" Nullable="false" />
-          <Property Name="CUST_NO" Type="Int32" Nullable="false" />
-          <Property Name="TAG_TYPE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="P_N" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CUST_P_N" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="QTY" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TAG_SEQ" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TR_TYPE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OPE_SEQ" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RESULT" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RSN_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TRUCK_NO" Type="Int32" />
+          <Property Name="CUST_NO" Type="Int32" />
+          <Property Name="SHIP_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CHECK_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SHIP_P_N" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SHIP_QTY" Type="Int32" />
+          <Property Name="TAG_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="P_N" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CUST_P_N" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QTY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TAG_SEQ" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SCAN_DATE_YMD" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Status" Type="Boolean" Nullable="false" />
-          <Property Name="uuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+          <Property Name="point" Type="Int32" Nullable="false" />
+          <Property Name="uuid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="qr_shipping_log_org">
           <Key>
@@ -109,15 +111,25 @@ warning 6013: The table/view 'rawsca.dbo.qr_shipping_log' does not have a primar
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="SEQ" Type="Int32" Nullable="false" />
+          <Property Name="W_H" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DEV_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LOGIN_ID" Type="Int32" Nullable="false" />
           <Property Name="TR_DATE_YMD" Type="Int32" Nullable="false" />
-          <Property Name="TRUCK_NO" Type="Int32" Nullable="false" />
-          <Property Name="CUST_NO" Type="Int32" Nullable="false" />
-          <Property Name="TAG_TYPE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="P_N" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CUST_P_N" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="QTY" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TAG_SEQ" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TR_TYPE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OPE_SEQ" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RESULT" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RSN_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TRUCK_NO" Type="Int32" />
+          <Property Name="CUST_NO" Type="Int32" />
+          <Property Name="SHIP_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CHECK_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SHIP_P_N" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SHIP_QTY" Type="Int32" />
+          <Property Name="TAG_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="P_N" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CUST_P_N" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QTY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TAG_SEQ" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SCAN_DATE_YMD" Type="Int32" Nullable="false" />
           <Property Name="SCAN_TIME" Type="Int32" Nullable="false" />
         </EntityType>
@@ -131,17 +143,28 @@ warning 6013: The table/view 'rawsca.dbo.qr_shipping_log' does not have a primar
             <EntityTypeMapping TypeName="rawscaModel.qr_shipping_log_mod">
               <MappingFragment StoreEntitySet="qr_shipping_log_mod">
                 <ScalarProperty Name="uuid" ColumnName="uuid" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="point" ColumnName="point" />
+                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="SCAN_DATE_YMD" ColumnName="SCAN_DATE_YMD" />
                 <ScalarProperty Name="TAG_SEQ" ColumnName="TAG_SEQ" />
                 <ScalarProperty Name="QTY" ColumnName="QTY" />
                 <ScalarProperty Name="CUST_P_N" ColumnName="CUST_P_N" />
                 <ScalarProperty Name="P_N" ColumnName="P_N" />
                 <ScalarProperty Name="TAG_TYPE" ColumnName="TAG_TYPE" />
+                <ScalarProperty Name="SHIP_QTY" ColumnName="SHIP_QTY" />
+                <ScalarProperty Name="SHIP_P_N" ColumnName="SHIP_P_N" />
+                <ScalarProperty Name="CHECK_TYPE" ColumnName="CHECK_TYPE" />
+                <ScalarProperty Name="SHIP_NO" ColumnName="SHIP_NO" />
                 <ScalarProperty Name="CUST_NO" ColumnName="CUST_NO" />
                 <ScalarProperty Name="TRUCK_NO" ColumnName="TRUCK_NO" />
+                <ScalarProperty Name="RSN_CODE" ColumnName="RSN_CODE" />
+                <ScalarProperty Name="RESULT" ColumnName="RESULT" />
+                <ScalarProperty Name="OPE_SEQ" ColumnName="OPE_SEQ" />
+                <ScalarProperty Name="TR_TYPE" ColumnName="TR_TYPE" />
                 <ScalarProperty Name="TR_DATE_YMD" ColumnName="TR_DATE_YMD" />
                 <ScalarProperty Name="LOGIN_ID" ColumnName="LOGIN_ID" />
+                <ScalarProperty Name="DEV_ID" ColumnName="DEV_ID" />
+                <ScalarProperty Name="W_H" ColumnName="W_H" />
                 <ScalarProperty Name="SEQ" ColumnName="SEQ" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
@@ -157,10 +180,20 @@ warning 6013: The table/view 'rawsca.dbo.qr_shipping_log' does not have a primar
                 <ScalarProperty Name="CUST_P_N" ColumnName="CUST_P_N" />
                 <ScalarProperty Name="P_N" ColumnName="P_N" />
                 <ScalarProperty Name="TAG_TYPE" ColumnName="TAG_TYPE" />
+                <ScalarProperty Name="SHIP_QTY" ColumnName="SHIP_QTY" />
+                <ScalarProperty Name="SHIP_P_N" ColumnName="SHIP_P_N" />
+                <ScalarProperty Name="CHECK_TYPE" ColumnName="CHECK_TYPE" />
+                <ScalarProperty Name="SHIP_NO" ColumnName="SHIP_NO" />
                 <ScalarProperty Name="CUST_NO" ColumnName="CUST_NO" />
                 <ScalarProperty Name="TRUCK_NO" ColumnName="TRUCK_NO" />
+                <ScalarProperty Name="RSN_CODE" ColumnName="RSN_CODE" />
+                <ScalarProperty Name="RESULT" ColumnName="RESULT" />
+                <ScalarProperty Name="OPE_SEQ" ColumnName="OPE_SEQ" />
+                <ScalarProperty Name="TR_TYPE" ColumnName="TR_TYPE" />
                 <ScalarProperty Name="TR_DATE_YMD" ColumnName="TR_DATE_YMD" />
                 <ScalarProperty Name="LOGIN_ID" ColumnName="LOGIN_ID" />
+                <ScalarProperty Name="DEV_ID" ColumnName="DEV_ID" />
+                <ScalarProperty Name="W_H" ColumnName="W_H" />
                 <ScalarProperty Name="SEQ" ColumnName="SEQ" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

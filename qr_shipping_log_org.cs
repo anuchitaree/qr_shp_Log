@@ -16,10 +16,20 @@ namespace qr_shp_Log
     {
         public int ID { get; set; }
         public int SEQ { get; set; }
+        public string W_H { get; set; }
+        public string DEV_ID { get; set; }
         public int LOGIN_ID { get; set; }
         public int TR_DATE_YMD { get; set; }
-        public int TRUCK_NO { get; set; }
-        public int CUST_NO { get; set; }
+        public string TR_TYPE { get; set; }
+        public string OPE_SEQ { get; set; }
+        public string RESULT { get; set; }
+        public string RSN_CODE { get; set; }
+        public Nullable<int> TRUCK_NO { get; set; }
+        public Nullable<int> CUST_NO { get; set; }
+        public string SHIP_NO { get; set; }
+        public string CHECK_TYPE { get; set; }
+        public string SHIP_P_N { get; set; }
+        public Nullable<int> SHIP_QTY { get; set; }
         public string TAG_TYPE { get; set; }
         public string P_N { get; set; }
         public string CUST_P_N { get; set; }
