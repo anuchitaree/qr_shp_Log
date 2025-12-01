@@ -1,12 +1,10 @@
-﻿using Newtonsoft.Json;
-using qr_shp_Log.Models;
+﻿using qr_shp_Log.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using System.Text;
+using System.Runtime.Remoting.Contexts;
 using System.Windows.Forms;
 
 namespace qr_shp_Log
@@ -101,6 +99,8 @@ namespace qr_shp_Log
                 var uuid = 0;
                 using (var context = new rawscaEntities())
                 {
+                    List<qr_shipping_log> qr_Shipping_Log = new List<qr_shipping_log>();
+
                     var qr_shp_logs = context.qr_shipping_log_mod
                         .Where(x => x.RESULT == "0").Where(x => x.TAG_TYPE != null).ToList();
 
@@ -129,6 +129,7 @@ namespace qr_shp_Log
 
                             for (var i = 0; i < qr_shp_log_by_truck.Count; i++)
                             {
+                                qr_shipping_log qr_Shipping_Log_obj;
 
                                 var check_type = qr_shp_log_by_truck[i].CHECK_TYPE;
                                 switch (check_type)
@@ -137,6 +138,32 @@ namespace qr_shp_Log
                                         qr_shp_log_by_truck[i].status = 1;
                                         qr_shp_log_by_truck[i].point = 2;
                                         qr_shp_log_by_truck[i].uuid = uuid++.ToString();
+
+                                         qr_Shipping_Log_obj = new qr_shipping_log()
+                                        {
+
+                                            ID = qr_shp_log_by_truck[i].ID,
+                                            FACTORY_ID = "40036",
+                                            LOGIN_ID = qr_shp_log_by_truck[i].LOGIN_ID,
+                                            TR_DATE_YMD = qr_shp_log_by_truck[i].TR_DATE_YMD,
+                                            TR_TYPE = qr_shp_log_by_truck[i].TR_TYPE,
+                                            RESULT = qr_shp_log_by_truck[i].RESULT,
+                                            SHIP_NO = qr_shp_log_by_truck[i].SHIP_NO,
+                                            CHECK_TYPE = qr_shp_log_by_truck[i].CHECK_TYPE,
+                                            SHIP_P_N = qr_shp_log_by_truck[i].SHIP_P_N,
+                                            TAG_TYPE = qr_shp_log_by_truck[i].TAG_TYPE,
+                                            TRUCK_NO = qr_shp_log_by_truck[i].TRUCK_NO,
+                                            QTY = qr_shp_log_by_truck[i].QTY,
+                                            TAG_SEQ = qr_shp_log_by_truck[i].TAG_SEQ,
+                                            P_N = qr_shp_log_by_truck[i].P_N,
+                                            CUST_NO = qr_shp_log_by_truck[i].CUST_NO,
+                                            CUST_P_N = qr_shp_log_by_truck[i].CUST_P_N,
+                                            CUST_TAG_SEQ = qr_shp_log_by_truck[i].tag_seq_no_denso_tag,
+                                            SCAN_DATE_YMD = qr_shp_log_by_truck[i].SCAN_DATE_YMD.ToString("yyyyMMdd"),
+                                            SCAN_TIME_HHmmss = qr_shp_log_by_truck[i].SCAN_DATE_YMD.ToString("HHmmss"),
+                                        };
+                                        qr_Shipping_Log.Add(qr_Shipping_Log_obj);
+
                                         break;
 
                                     case "1":  // 3 point check
@@ -144,11 +171,11 @@ namespace qr_shp_Log
                                         {
 
 
-                                            if (qr_shp_log_by_truck[i].TAG_TYPE == "21" 
-                                                && qr_shp_log_by_truck[i + 1].TAG_TYPE == "UR"  
+                                            if (qr_shp_log_by_truck[i].TAG_TYPE == "21"
+                                                && qr_shp_log_by_truck[i + 1].TAG_TYPE == "UR"
                                                 && qr_shp_log_by_truck[i].CUST_NO == qr_shp_log_by_truck[i + 1].CUST_NO
                                                 && qr_shp_log_by_truck[i].TRUCK_NO == qr_shp_log_by_truck[i + 1].TRUCK_NO
-                                                && qr_shp_log_by_truck[i].P_N == qr_shp_log_by_truck[i+1].P_N 
+                                                && qr_shp_log_by_truck[i].P_N == qr_shp_log_by_truck[i + 1].P_N
                                                 && qr_shp_log_by_truck[i].CUST_P_N == qr_shp_log_by_truck[i + 1].CUST_P_N)
                                             {
                                                 var uid = uuid++.ToString();
@@ -162,6 +189,32 @@ namespace qr_shp_Log
 
                                                 qr_shp_log_by_truck[i].tag_seq_no_denso_tag = qr_shp_log_by_truck[i + 1].TAG_SEQ;
                                                 qr_shp_log_by_truck[i].CUST_SCAN_DATETIME = qr_shp_log_by_truck[i + 1].SCAN_DATE_YMD;
+
+                                                qr_Shipping_Log_obj = new qr_shipping_log()
+                                                {
+
+                                                    ID = qr_shp_log_by_truck[i].ID,
+                                                    FACTORY_ID = "40036",
+                                                    LOGIN_ID = qr_shp_log_by_truck[i].LOGIN_ID,
+                                                    TR_DATE_YMD = qr_shp_log_by_truck[i].TR_DATE_YMD,
+                                                    TR_TYPE = qr_shp_log_by_truck[i].TR_TYPE,
+                                                    RESULT = qr_shp_log_by_truck[i].RESULT,
+                                                    SHIP_NO = qr_shp_log_by_truck[i].SHIP_NO,
+                                                    CHECK_TYPE = qr_shp_log_by_truck[i].CHECK_TYPE,
+                                                    SHIP_P_N = qr_shp_log_by_truck[i].SHIP_P_N,
+                                                    TAG_TYPE = qr_shp_log_by_truck[i].TAG_TYPE,
+                                                    TRUCK_NO = qr_shp_log_by_truck[i].TRUCK_NO,
+                                                    QTY = qr_shp_log_by_truck[i].QTY,
+                                                    TAG_SEQ = qr_shp_log_by_truck[i].TAG_SEQ,
+                                                    P_N = qr_shp_log_by_truck[i].P_N,
+                                                    CUST_NO = qr_shp_log_by_truck[i].CUST_NO,
+                                                    CUST_P_N = qr_shp_log_by_truck[i].CUST_P_N,
+                                                    CUST_TAG_SEQ = qr_shp_log_by_truck[i].tag_seq_no_denso_tag,
+                                                    SCAN_DATE_YMD = qr_shp_log_by_truck[i].SCAN_DATE_YMD.ToString("yyyyMMdd"),
+                                                    SCAN_TIME_HHmmss = qr_shp_log_by_truck[i].SCAN_DATE_YMD.ToString("HHmmss"),
+                                                };
+                                                qr_Shipping_Log.Add(qr_Shipping_Log_obj);
+
 
                                             }
                                             else if (qr_shp_log_by_truck[i].TAG_TYPE == "21" && qr_shp_log_by_truck[i + 1].TAG_TYPE == "21")
@@ -192,7 +245,7 @@ namespace qr_shp_Log
                                         try
                                         {
 
-                                            if (qr_shp_log_by_truck[i].TAG_TYPE == "21" 
+                                            if (qr_shp_log_by_truck[i].TAG_TYPE == "21"
                                                 && qr_shp_log_by_truck[i + 1].TAG_TYPE == "CS"
                                                 && qr_shp_log_by_truck[i].CUST_NO == qr_shp_log_by_truck[i + 1].CUST_NO
                                                 && qr_shp_log_by_truck[i].TRUCK_NO == qr_shp_log_by_truck[i + 1].TRUCK_NO
@@ -208,6 +261,31 @@ namespace qr_shp_Log
 
                                                 qr_shp_log_by_truck[i].tag_seq_no_denso_tag = qr_shp_log_by_truck[i + 1].TAG_SEQ;
                                                 qr_shp_log_by_truck[i].CUST_SCAN_DATETIME = qr_shp_log_by_truck[i + 1].SCAN_DATE_YMD;
+
+                                                qr_Shipping_Log_obj = new qr_shipping_log()
+                                                {
+
+                                                    ID = qr_shp_log_by_truck[i].ID,
+                                                    FACTORY_ID = "40036",
+                                                    LOGIN_ID = qr_shp_log_by_truck[i].LOGIN_ID,
+                                                    TR_DATE_YMD = qr_shp_log_by_truck[i].TR_DATE_YMD,
+                                                    TR_TYPE = qr_shp_log_by_truck[i].TR_TYPE,
+                                                    RESULT = qr_shp_log_by_truck[i].RESULT,
+                                                    SHIP_NO = qr_shp_log_by_truck[i].SHIP_NO,
+                                                    CHECK_TYPE = qr_shp_log_by_truck[i].CHECK_TYPE,
+                                                    SHIP_P_N = qr_shp_log_by_truck[i].SHIP_P_N,
+                                                    TAG_TYPE = qr_shp_log_by_truck[i].TAG_TYPE,
+                                                    TRUCK_NO = qr_shp_log_by_truck[i].TRUCK_NO,
+                                                    QTY = qr_shp_log_by_truck[i].QTY,
+                                                    TAG_SEQ = qr_shp_log_by_truck[i].TAG_SEQ,
+                                                    P_N = qr_shp_log_by_truck[i].P_N,
+                                                    CUST_NO = qr_shp_log_by_truck[i].CUST_NO,
+                                                    CUST_P_N = qr_shp_log_by_truck[i].CUST_P_N,
+                                                    CUST_TAG_SEQ = qr_shp_log_by_truck[i].tag_seq_no_denso_tag,
+                                                    SCAN_DATE_YMD = qr_shp_log_by_truck[i].SCAN_DATE_YMD.ToString("yyyyMMdd"),
+                                                    SCAN_TIME_HHmmss = qr_shp_log_by_truck[i].SCAN_DATE_YMD.ToString("HHmmss"),
+                                                };
+                                                qr_Shipping_Log.Add(qr_Shipping_Log_obj);
 
                                             }
                                             else if (qr_shp_log_by_truck[i].TAG_TYPE == "21" && qr_shp_log_by_truck[i + 1].TAG_TYPE == "21")
@@ -232,21 +310,21 @@ namespace qr_shp_Log
                                 }
 
 
-
                             }
 
-                            //context.Update(qr_shp_log_by_truck);
                             context.SaveChanges();
 
 
                             //var json_string = JsonConvert.SerializeObject(qr_shp_log_by_truck);
-                            
+
                         }
 
-                    
+                        context.qr_shipping_log.AddRange(qr_Shipping_Log);
+                        context.SaveChanges();
                     }
 
                 }
+               
                 MessageBox.Show("Processing completed.");
 
             }
@@ -260,7 +338,7 @@ namespace qr_shp_Log
 
         private void button4_Click(object sender, EventArgs e)
         {
-            using(var context = new rawscaEntities())
+            using (var context = new rawscaEntities())
             {
                 var dataContext = context.qr_shipping_log_mod.ToList();
 
@@ -273,7 +351,7 @@ namespace qr_shp_Log
                     //writer.WriteLine($"ID \t SEQ \t W_H \t DEV_ID \t LOGIN_ID \t TR_DATE_YMD \t TR_TYPE \t OPE_SEQ \t RESULT \t RSN_CODE \t TRUCK_NO \t CUST_NO \t SHIP_NO \t CHECK_TYPE \t SHIP_P_N \t SHIP_QTY \t TAG_TYPE \t P_N \t CUST_P_N \t QTY \t TAG_SEQ \t SCAN_DATE_YMD \t status \t point \t uuid"); // Uses the overridden ToString()
                     foreach (var obj in dataContext)
                     {
-                       writer.WriteLine($"{obj.ID},{obj.SEQ},{obj.W_H},{obj.DEV_ID},{obj.LOGIN_ID},{obj.TR_DATE_YMD.ToString("yyyy-MM-dd HH:mm:ss")},{obj.TR_TYPE},{obj.OPE_SEQ},{obj.RESULT},{obj.RSN_CODE},{obj.TRUCK_NO},{obj.CUST_NO},{obj.SHIP_NO},{obj.CHECK_TYPE},{obj.SHIP_P_N},{obj.SHIP_QTY},{obj.TAG_TYPE},{obj.P_N},{obj.CUST_P_N},{obj.QTY},{obj.TAG_SEQ},{obj.SCAN_DATE_YMD.ToString("yyyy-MM-dd HH:mm:ss")},{obj.status},{obj.point},{obj.uuid},{obj.tag_seq_no_denso_tag},{obj.CUST_SCAN_DATETIME}"); // Uses the overridden ToString()
+                        writer.WriteLine($"{obj.ID},{obj.SEQ},{obj.W_H},{obj.DEV_ID},{obj.LOGIN_ID},{obj.TR_DATE_YMD.ToString("yyyy-MM-dd HH:mm:ss")},{obj.TR_TYPE},{obj.OPE_SEQ},{obj.RESULT},{obj.RSN_CODE},{obj.TRUCK_NO},{obj.CUST_NO},{obj.SHIP_NO},{obj.CHECK_TYPE},{obj.SHIP_P_N},{obj.SHIP_QTY},{obj.TAG_TYPE},{obj.P_N},{obj.CUST_P_N},{obj.QTY},{obj.TAG_SEQ},{obj.SCAN_DATE_YMD.ToString("yyyy-MM-dd HH:mm:ss")},{obj.status},{obj.point},{obj.uuid},{obj.tag_seq_no_denso_tag},{obj.CUST_SCAN_DATETIME}"); // Uses the overridden ToString()
                         //writer.WriteLine($"{obj.ID}\t{obj.SEQ}\t{obj.W_H}\t{obj.DEV_ID}\t{obj.LOGIN_ID}\t{obj.TR_DATE_YMD.ToString("yyyy-MM-dd HH:mm:ss")}\t{obj.TR_TYPE}\t{obj.OPE_SEQ}\t{obj.RESULT}\t{obj.RSN_CODE}\t{obj.TRUCK_NO}\t{obj.CUST_NO}\t{obj.SHIP_NO}\t{obj.CHECK_TYPE}\t{obj.SHIP_P_N}\t{obj.SHIP_QTY}\t{obj.TAG_TYPE}\t{obj.P_N}\t{obj.CUST_P_N}\t{obj.QTY}\t{obj.TAG_SEQ}\t{obj.SCAN_DATE_YMD.ToString("yyyy-MM-dd HH:mm:ss")}\t{obj.status}\t{obj.point}\t{obj.uuid}"); // Uses the overridden ToString()
                     }
                 }
@@ -282,7 +360,7 @@ namespace qr_shp_Log
                 //FileStream fs = new FileStream("C:\\Users\\Administrator\\source\\repos\\qr_shp_Log>\\qr_shp_logs.txt", FileMode.Append, FileAccess.Write, FileShare.Write);
                 //fs.Close();
                 //StreamWriter sw = new StreamWriter("C:\\Users\\Administrator\\source\\repos\\qr_shp_Log>\\qr_shp_logs.txt", true, Encoding.ASCII);
-                
+
                 //sw.Write("");
                 //sw.Close();
 
@@ -294,10 +372,10 @@ namespace qr_shp_Log
 
         private void button3_Click(object sender, EventArgs e)
         {
-            using(var context = new rawscaEntities())
+            using (var context = new rawscaEntities())
             {
                 var delete_data = context.qr_shipping_log_mod.Where(x => x.status == 1).ToList();
-                foreach(var item in delete_data)
+                foreach (var item in delete_data)
                 {
                     context.qr_shipping_log_mod.Remove(item);
                 }
