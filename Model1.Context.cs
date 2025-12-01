@@ -27,5 +27,6 @@ namespace qr_shp_Log
     
         public virtual DbSet<qr_shipping_log_mod> qr_shipping_log_mod { get; set; }
         public virtual DbSet<qr_shipping_log_org> qr_shipping_log_org { get; set; }
+        public virtual DbSet<qr_shipping_log_new> qr_shipping_log_new { get; set; }
     }
 }

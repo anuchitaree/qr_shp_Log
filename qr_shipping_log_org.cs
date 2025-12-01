@@ -24,8 +24,8 @@ namespace qr_shp_Log
         public string OPE_SEQ { get; set; }
         public string RESULT { get; set; }
         public string RSN_CODE { get; set; }
-        public Nullable<int> TRUCK_NO { get; set; }
-        public Nullable<int> CUST_NO { get; set; }
+        public int TRUCK_NO { get; set; }
+        public int CUST_NO { get; set; }
         public string SHIP_NO { get; set; }
         public string CHECK_TYPE { get; set; }
         public string SHIP_P_N { get; set; }

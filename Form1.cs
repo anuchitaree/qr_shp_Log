@@ -144,7 +144,12 @@ namespace qr_shp_Log
                                         {
 
 
-                                            if (qr_shp_log_by_truck[i].TAG_TYPE == "21" && (qr_shp_log_by_truck[i + 1].TAG_TYPE == "UR" || qr_shp_log_by_truck[i + 1].TAG_TYPE == "CS"))
+                                            if (qr_shp_log_by_truck[i].TAG_TYPE == "21" 
+                                                && qr_shp_log_by_truck[i + 1].TAG_TYPE == "UR"  
+                                                && qr_shp_log_by_truck[i].CUST_NO == qr_shp_log_by_truck[i + 1].CUST_NO
+                                                && qr_shp_log_by_truck[i].TRUCK_NO == qr_shp_log_by_truck[i + 1].TRUCK_NO
+                                                && qr_shp_log_by_truck[i].P_N == qr_shp_log_by_truck[i+1].P_N 
+                                                && qr_shp_log_by_truck[i].CUST_P_N == qr_shp_log_by_truck[i + 1].CUST_P_N)
                                             {
                                                 var uid = uuid++.ToString();
                                                 qr_shp_log_by_truck[i].status = 1;
@@ -153,6 +158,11 @@ namespace qr_shp_Log
                                                 qr_shp_log_by_truck[i + 1].status = 1;
                                                 qr_shp_log_by_truck[i + 1].point = 3;
                                                 qr_shp_log_by_truck[i + 1].uuid = uid;
+                                                qr_shp_log_by_truck[i + 1].status = 1;
+
+                                                qr_shp_log_by_truck[i].tag_seq_no_denso_tag = qr_shp_log_by_truck[i + 1].TAG_SEQ;
+                                                qr_shp_log_by_truck[i].CUST_SCAN_DATETIME = qr_shp_log_by_truck[i + 1].SCAN_DATE_YMD;
+
                                             }
                                             else if (qr_shp_log_by_truck[i].TAG_TYPE == "21" && qr_shp_log_by_truck[i + 1].TAG_TYPE == "21")
                                             {
@@ -182,7 +192,11 @@ namespace qr_shp_Log
                                         try
                                         {
 
-                                            if (qr_shp_log_by_truck[i].TAG_TYPE == "21" && (qr_shp_log_by_truck[i + 1].TAG_TYPE == "UR" || qr_shp_log_by_truck[i + 1].TAG_TYPE == "CS"))
+                                            if (qr_shp_log_by_truck[i].TAG_TYPE == "21" 
+                                                && qr_shp_log_by_truck[i + 1].TAG_TYPE == "CS"
+                                                && qr_shp_log_by_truck[i].CUST_NO == qr_shp_log_by_truck[i + 1].CUST_NO
+                                                && qr_shp_log_by_truck[i].TRUCK_NO == qr_shp_log_by_truck[i + 1].TRUCK_NO
+                                                && qr_shp_log_by_truck[i].CUST_P_N == qr_shp_log_by_truck[i + 1].CUST_P_N)
                                             {
                                                 var uid = uuid++.ToString();
                                                 qr_shp_log_by_truck[i].status = 1;
@@ -191,6 +205,10 @@ namespace qr_shp_Log
                                                 qr_shp_log_by_truck[i + 1].status = 1;
                                                 qr_shp_log_by_truck[i + 1].point = 3;
                                                 qr_shp_log_by_truck[i + 1].uuid = uid;
+
+                                                qr_shp_log_by_truck[i].tag_seq_no_denso_tag = qr_shp_log_by_truck[i + 1].TAG_SEQ;
+                                                qr_shp_log_by_truck[i].CUST_SCAN_DATETIME = qr_shp_log_by_truck[i + 1].SCAN_DATE_YMD;
+
                                             }
                                             else if (qr_shp_log_by_truck[i].TAG_TYPE == "21" && qr_shp_log_by_truck[i + 1].TAG_TYPE == "21")
                                             {
@@ -221,21 +239,15 @@ namespace qr_shp_Log
                             context.SaveChanges();
 
 
-
-                            //MessageBox.Show($"Truck no ; {item.truck}");
-
-
-
                             //var json_string = JsonConvert.SerializeObject(qr_shp_log_by_truck);
                             
                         }
 
-                        //MessageBox.Show("Check now 2025-09-01");
-                        
-
+                    
                     }
 
                 }
+                MessageBox.Show("Processing completed.");
 
             }
             catch (Exception ex)
@@ -252,16 +264,16 @@ namespace qr_shp_Log
             {
                 var dataContext = context.qr_shipping_log_mod.ToList();
 
-                string filePath = "C:\\Users\\Administrator\\source\\repos\\qr_shp_Log\\qr_shp_logs.txt";
+                string filePath = "C:\\project\\qr_shp_log\\qr_shp_logs.txt";
 
                 using (StreamWriter writer = new StreamWriter(filePath))
                 {
-                    writer.WriteLine($"ID,SEQ,W_H,DEV_ID,LOGIN_ID,TR_DATE_YMD,TR_TYPE,OPE_SEQ,RESULT,RSN_CODE,TRUCK_NO,CUST_NO,SHIP_NO,CHECK_TYPE,SHIP_P_N,SHIP_QTY,TAG_TYPE,P_N,CUST_P_N,QTY,TAG_SEQ,SCAN_DATE_YMD,status,point,uuid"); // Uses the overridden ToString()
+                    writer.WriteLine($"ID,SEQ,W_H,DEV_ID,LOGIN_ID,TR_DATE_YMD,TR_TYPE,OPE_SEQ,RESULT,RSN_CODE,TRUCK_NO,CUST_NO,SHIP_NO,CHECK_TYPE,SHIP_P_N,SHIP_QTY,TAG_TYPE,P_N,CUST_P_N,QTY,TAG_SEQ,SCAN_DATE_YMD,status,point,uuid,cust_tag_seq,cust_scan_datetime"); // Uses the overridden ToString()
 
                     //writer.WriteLine($"ID \t SEQ \t W_H \t DEV_ID \t LOGIN_ID \t TR_DATE_YMD \t TR_TYPE \t OPE_SEQ \t RESULT \t RSN_CODE \t TRUCK_NO \t CUST_NO \t SHIP_NO \t CHECK_TYPE \t SHIP_P_N \t SHIP_QTY \t TAG_TYPE \t P_N \t CUST_P_N \t QTY \t TAG_SEQ \t SCAN_DATE_YMD \t status \t point \t uuid"); // Uses the overridden ToString()
                     foreach (var obj in dataContext)
                     {
-                       writer.WriteLine($"{obj.ID},{obj.SEQ},{obj.W_H},{obj.DEV_ID},{obj.LOGIN_ID},{obj.TR_DATE_YMD.ToString("yyyy-MM-dd HH:mm:ss")},{obj.TR_TYPE},{obj.OPE_SEQ},{obj.RESULT},{obj.RSN_CODE},{obj.TRUCK_NO},{obj.CUST_NO},{obj.SHIP_NO},{obj.CHECK_TYPE},{obj.SHIP_P_N},{obj.SHIP_QTY},{obj.TAG_TYPE},{obj.P_N},{obj.CUST_P_N},{obj.QTY},{obj.TAG_SEQ},{obj.SCAN_DATE_YMD.ToString("yyyy-MM-dd HH:mm:ss")},{obj.status},{obj.point},{obj.uuid}"); // Uses the overridden ToString()
+                       writer.WriteLine($"{obj.ID},{obj.SEQ},{obj.W_H},{obj.DEV_ID},{obj.LOGIN_ID},{obj.TR_DATE_YMD.ToString("yyyy-MM-dd HH:mm:ss")},{obj.TR_TYPE},{obj.OPE_SEQ},{obj.RESULT},{obj.RSN_CODE},{obj.TRUCK_NO},{obj.CUST_NO},{obj.SHIP_NO},{obj.CHECK_TYPE},{obj.SHIP_P_N},{obj.SHIP_QTY},{obj.TAG_TYPE},{obj.P_N},{obj.CUST_P_N},{obj.QTY},{obj.TAG_SEQ},{obj.SCAN_DATE_YMD.ToString("yyyy-MM-dd HH:mm:ss")},{obj.status},{obj.point},{obj.uuid},{obj.tag_seq_no_denso_tag},{obj.CUST_SCAN_DATETIME}"); // Uses the overridden ToString()
                         //writer.WriteLine($"{obj.ID}\t{obj.SEQ}\t{obj.W_H}\t{obj.DEV_ID}\t{obj.LOGIN_ID}\t{obj.TR_DATE_YMD.ToString("yyyy-MM-dd HH:mm:ss")}\t{obj.TR_TYPE}\t{obj.OPE_SEQ}\t{obj.RESULT}\t{obj.RSN_CODE}\t{obj.TRUCK_NO}\t{obj.CUST_NO}\t{obj.SHIP_NO}\t{obj.CHECK_TYPE}\t{obj.SHIP_P_N}\t{obj.SHIP_QTY}\t{obj.TAG_TYPE}\t{obj.P_N}\t{obj.CUST_P_N}\t{obj.QTY}\t{obj.TAG_SEQ}\t{obj.SCAN_DATE_YMD.ToString("yyyy-MM-dd HH:mm:ss")}\t{obj.status}\t{obj.point}\t{obj.uuid}"); // Uses the overridden ToString()
                     }
                 }
@@ -280,7 +292,17 @@ namespace qr_shp_Log
 
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            using(var context = new rawscaEntities())
+            {
+                var delete_data = context.qr_shipping_log_mod.Where(x => x.status == 1).ToList();
+                foreach(var item in delete_data)
+                {
+                    context.qr_shipping_log_mod.Remove(item);
+                }
 
-
+            }
+        }
     }
 }

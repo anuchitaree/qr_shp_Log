@@ -19,9 +19,9 @@
           <Property Name="OPE_SEQ" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="RESULT" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="RSN_CODE" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="TRUCK_NO" Type="int" />
-          <Property Name="CUST_NO" Type="int" />
-          <Property Name="SHIP_NO" Type="nvarchar" MaxLength="50" />
+          <Property Name="TRUCK_NO" Type="int" Nullable="false" />
+          <Property Name="CUST_NO" Type="int" Nullable="false" />
+          <Property Name="SHIP_NO" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CHECK_TYPE" Type="nvarchar" MaxLength="50" />
           <Property Name="SHIP_P_N" Type="nvarchar" MaxLength="50" />
           <Property Name="SHIP_QTY" Type="int" />
@@ -32,8 +32,40 @@
           <Property Name="TAG_SEQ" Type="nvarchar" MaxLength="50" />
           <Property Name="SCAN_DATE_YMD" Type="datetime" Nullable="false" />
           <Property Name="status" Type="int" Nullable="false" />
-          <Property Name="point" Type="int" Nullable="false" />
+          <Property Name="point" Type="int" />
           <Property Name="uuid" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="tag_seq_no_denso_tag" Type="nvarchar" MaxLength="50" />
+          <Property Name="CUST_SCAN_DATETIME" Type="datetime" />
+        </EntityType>
+        <EntityType Name="qr_shipping_log_new">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="SEQ" Type="int" Nullable="false" />
+          <Property Name="LOGIN_ID" Type="int" Nullable="false" />
+          <Property Name="TR_DATE_YMD" Type="date" Nullable="false" />
+          <Property Name="TRUCK_NO" Type="int" Nullable="false" />
+          <Property Name="CUST_NO" Type="int" Nullable="false" />
+          <Property Name="TAG_TYPE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="P_N" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CUST_P_N" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="QTY" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TAG_SEQ" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SCAN_DATE_YMD" Type="datetime" Nullable="false" />
+          <Property Name="uuid" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID_ur" Type="int" Nullable="false" />
+          <Property Name="SEQ_ur" Type="int" Nullable="false" />
+          <Property Name="LOGIN_ID_ur" Type="int" Nullable="false" />
+          <Property Name="TR_DATE_YMD_ur" Type="date" Nullable="false" />
+          <Property Name="TRUCK_NO_ur" Type="int" Nullable="false" />
+          <Property Name="CUST_NO_ur" Type="int" Nullable="false" />
+          <Property Name="TAG_TYPE_ur" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="P_N_ur" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CUST_P_N_ur" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="QTY_ur" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TAG_SEQ_ur" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SCAN_DATE_YMD_ur" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="qr_shipping_log_org">
           <Key>
@@ -49,9 +81,9 @@
           <Property Name="OPE_SEQ" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="RESULT" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="RSN_CODE" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="TRUCK_NO" Type="int" />
-          <Property Name="CUST_NO" Type="int" />
-          <Property Name="SHIP_NO" Type="nvarchar" MaxLength="50" />
+          <Property Name="TRUCK_NO" Type="int" Nullable="false" />
+          <Property Name="CUST_NO" Type="int" Nullable="false" />
+          <Property Name="SHIP_NO" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CHECK_TYPE" Type="nvarchar" MaxLength="50" />
           <Property Name="SHIP_P_N" Type="nvarchar" MaxLength="50" />
           <Property Name="SHIP_QTY" Type="int" />
@@ -65,6 +97,7 @@
         </EntityType>
         <EntityContainer Name="rawscaModelStoreContainer">
           <EntitySet Name="qr_shipping_log_mod" EntityType="Self.qr_shipping_log_mod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="qr_shipping_log_new" EntityType="Self.qr_shipping_log_new" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="qr_shipping_log_org" EntityType="Self.qr_shipping_log_org" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -74,6 +107,7 @@
         <EntityContainer Name="rawscaEntities" annotation:LazyLoadingEnabled="true" >
           <EntitySet Name="qr_shipping_log_mod" EntityType="rawscaModel.qr_shipping_log_mod" />
           <EntitySet Name="qr_shipping_log_org" EntityType="rawscaModel.qr_shipping_log_org" />
+          <EntitySet Name="qr_shipping_log_new" EntityType="rawscaModel.qr_shipping_log_new" />
         </EntityContainer>
         <EntityType Name="qr_shipping_log_mod">
           <Key>
@@ -89,9 +123,9 @@
           <Property Name="OPE_SEQ" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RESULT" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RSN_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TRUCK_NO" Type="Int32" />
-          <Property Name="CUST_NO" Type="Int32" />
-          <Property Name="SHIP_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TRUCK_NO" Type="Int32" Nullable="false" />
+          <Property Name="CUST_NO" Type="Int32" Nullable="false" />
+          <Property Name="SHIP_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CHECK_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SHIP_P_N" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SHIP_QTY" Type="Int32" />
@@ -102,8 +136,10 @@
           <Property Name="TAG_SEQ" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SCAN_DATE_YMD" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="status" Type="Int32" Nullable="false" />
-          <Property Name="point" Type="Int32" Nullable="false" />
+          <Property Name="point" Type="Int32" />
           <Property Name="uuid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tag_seq_no_denso_tag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CUST_SCAN_DATETIME" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="qr_shipping_log_org">
           <Key>
@@ -119,9 +155,9 @@
           <Property Name="OPE_SEQ" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RESULT" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RSN_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TRUCK_NO" Type="Int32" />
-          <Property Name="CUST_NO" Type="Int32" />
-          <Property Name="SHIP_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TRUCK_NO" Type="Int32" Nullable="false" />
+          <Property Name="CUST_NO" Type="Int32" Nullable="false" />
+          <Property Name="SHIP_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CHECK_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SHIP_P_N" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SHIP_QTY" Type="Int32" />
@@ -133,6 +169,36 @@
           <Property Name="SCAN_DATE_YMD" Type="Int32" Nullable="false" />
           <Property Name="SCAN_TIME" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="qr_shipping_log_new">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="SEQ" Type="Int32" Nullable="false" />
+          <Property Name="LOGIN_ID" Type="Int32" Nullable="false" />
+          <Property Name="TR_DATE_YMD" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TRUCK_NO" Type="Int32" Nullable="false" />
+          <Property Name="CUST_NO" Type="Int32" Nullable="false" />
+          <Property Name="TAG_TYPE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="P_N" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CUST_P_N" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QTY" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TAG_SEQ" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SCAN_DATE_YMD" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="uuid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ID_ur" Type="Int32" Nullable="false" />
+          <Property Name="SEQ_ur" Type="Int32" Nullable="false" />
+          <Property Name="LOGIN_ID_ur" Type="Int32" Nullable="false" />
+          <Property Name="TR_DATE_YMD_ur" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TRUCK_NO_ur" Type="Int32" Nullable="false" />
+          <Property Name="CUST_NO_ur" Type="Int32" Nullable="false" />
+          <Property Name="TAG_TYPE_ur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="P_N_ur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CUST_P_N_ur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QTY_ur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TAG_SEQ_ur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SCAN_DATE_YMD_ur" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -142,6 +208,8 @@
           <EntitySetMapping Name="qr_shipping_log_mod">
             <EntityTypeMapping TypeName="rawscaModel.qr_shipping_log_mod">
               <MappingFragment StoreEntitySet="qr_shipping_log_mod">
+                <ScalarProperty Name="CUST_SCAN_DATETIME" ColumnName="CUST_SCAN_DATETIME" />
+                <ScalarProperty Name="tag_seq_no_denso_tag" ColumnName="tag_seq_no_denso_tag" />
                 <ScalarProperty Name="uuid" ColumnName="uuid" />
                 <ScalarProperty Name="point" ColumnName="point" />
                 <ScalarProperty Name="status" ColumnName="status" />
@@ -194,6 +262,37 @@
                 <ScalarProperty Name="LOGIN_ID" ColumnName="LOGIN_ID" />
                 <ScalarProperty Name="DEV_ID" ColumnName="DEV_ID" />
                 <ScalarProperty Name="W_H" ColumnName="W_H" />
+                <ScalarProperty Name="SEQ" ColumnName="SEQ" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="qr_shipping_log_new">
+            <EntityTypeMapping TypeName="rawscaModel.qr_shipping_log_new">
+              <MappingFragment StoreEntitySet="qr_shipping_log_new">
+                <ScalarProperty Name="SCAN_DATE_YMD_ur" ColumnName="SCAN_DATE_YMD_ur" />
+                <ScalarProperty Name="TAG_SEQ_ur" ColumnName="TAG_SEQ_ur" />
+                <ScalarProperty Name="QTY_ur" ColumnName="QTY_ur" />
+                <ScalarProperty Name="CUST_P_N_ur" ColumnName="CUST_P_N_ur" />
+                <ScalarProperty Name="P_N_ur" ColumnName="P_N_ur" />
+                <ScalarProperty Name="TAG_TYPE_ur" ColumnName="TAG_TYPE_ur" />
+                <ScalarProperty Name="CUST_NO_ur" ColumnName="CUST_NO_ur" />
+                <ScalarProperty Name="TRUCK_NO_ur" ColumnName="TRUCK_NO_ur" />
+                <ScalarProperty Name="TR_DATE_YMD_ur" ColumnName="TR_DATE_YMD_ur" />
+                <ScalarProperty Name="LOGIN_ID_ur" ColumnName="LOGIN_ID_ur" />
+                <ScalarProperty Name="SEQ_ur" ColumnName="SEQ_ur" />
+                <ScalarProperty Name="ID_ur" ColumnName="ID_ur" />
+                <ScalarProperty Name="uuid" ColumnName="uuid" />
+                <ScalarProperty Name="SCAN_DATE_YMD" ColumnName="SCAN_DATE_YMD" />
+                <ScalarProperty Name="TAG_SEQ" ColumnName="TAG_SEQ" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="CUST_P_N" ColumnName="CUST_P_N" />
+                <ScalarProperty Name="P_N" ColumnName="P_N" />
+                <ScalarProperty Name="TAG_TYPE" ColumnName="TAG_TYPE" />
+                <ScalarProperty Name="CUST_NO" ColumnName="CUST_NO" />
+                <ScalarProperty Name="TRUCK_NO" ColumnName="TRUCK_NO" />
+                <ScalarProperty Name="TR_DATE_YMD" ColumnName="TR_DATE_YMD" />
+                <ScalarProperty Name="LOGIN_ID" ColumnName="LOGIN_ID" />
                 <ScalarProperty Name="SEQ" ColumnName="SEQ" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
